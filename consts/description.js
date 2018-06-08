@@ -1,23 +1,27 @@
-export const EMPTY_DESCRIPTION = {
-  CORE: {},
-  PLUGINS: [],
-  PARAMS: {},
-  PORT: 3000,
+const EMPTY_DESCRIPTION = {
+  core: {},
+  plugins: [],
+  params: {},
+  port: 3000,
 }
 
-export const EXAMPLE_DESCRIPTION = Object.assign({}, EMPTY_DESCRIPTION, {
-  CORE: {
-    NAME: 'authmagic-timerange-stateless-core',
-    SOURCE: '../authmagic-timerange-stateless-core',
+const EXAMPLE_DESCRIPTION = Object.assign({}, EMPTY_DESCRIPTION, {
+  core: {
+    name: 'authmagic-timerange-stateless-core',
+    source: '../authmagic-timerange-stateless-core',
   },
-  THEME: {
-    NAME: 'authmagic-link-email-phone-bootstrap-theme',
-    SOURCE: '../authmagic-link-email-phone-bootstrap-theme',
+  theme: {
+    name: 'authmagic-link-email-phone-bootstrap-theme',
+    source: '../authmagic-link-email-phone-bootstrap-theme',
   },
-  PLUGINS: [
-    {
-      NAME: 'authmagic-email-plugin',
-      SOURCE: '../authmagic-email-plugin',
+  plugins: {
+    'authmagic-email-plugin': {
+      source: '../authmagic-email-plugin',
     },
-  ],
+  },
 });
+
+module.exports = {
+  EMPTY_DESCRIPTION,
+  EXAMPLE_DESCRIPTION,
+}

@@ -4,21 +4,26 @@ const {
   uninstallCore,
   uninstallTheme,
   uninstallPlugin,
-} = require('./utils/functions');
-const {
-  read,
+  readConfig,
   write,
+} = require('./utils/main');
+const {
   init,
   install,
 } = require('./utils/helpers');
+const {
+  EMPTY_DESCRIPTION,
+  EXAMPLE_DESCRIPTION
+} = require('./consts/description');
+const packageName = 'authmagic';
 
 program
   .command('init')
-  .action(() => init(emptyDescription));
+  .action(() => init(EMPTY_DESCRIPTION));
 
 program
   .command('init-example')
-  .action(() => init(exampleDescription));
+  .action(() => init(EXAMPLE_DESCRIPTION));
 
 program
   .command('install [name] [source]')
@@ -26,7 +31,7 @@ program
   .option('-c, --core', 'Install core')
   .option('-t, --theme', 'Install theme')
   .action(function(name, source, cmd) {
-    const config = read();
+    const config = readConfig(packageName);
     if(!config) {
       init();
     }
@@ -49,8 +54,8 @@ program
       config.plugins[name] = {source};
     }
 
-    write(config);
-    install();
+    write(config, packageName);
+    install(packageName);
   });
 
 program
@@ -59,7 +64,7 @@ program
   .option('-c, --core', 'Uninstall core')
   .option('-t, --theme', 'Uninstall theme')
   .action(function(name, cmd) {
-    const config = read();
+    const config = readConfig(packageName);
     if(!config) {
       console.log(`AuthMagic is not initialized`);
       return;
@@ -71,28 +76,28 @@ program
     }
 
     if(cmd.core || name.endsWith('-core')) {
-      uninstallCore();
+      uninstallCore(packageName);
     } else if(cmd.theme || name.endsWith('-theme')) {
-      uninstallTheme();
+      uninstallTheme(packageName);
     } else {
-      uninstallPlugin(name);
+      uninstallPlugin(name, packageName);
     }
   });
 
 program
   .command('clear')
   .action(function() {
-    const {plugins} = read();
+    const {plugins} = readConfig(packageName);
 
     if(plugins) {
       for(let i=0, pluginNames = Object.keys(plugins); i<pluginNames.length; i++) {
         const name = pluginNames[i];
-        uninstallPlugin(name);
+        uninstallPlugin(name, packageName);
       }
     }
 
-    uninstallCore();
-    uninstallTheme();
+    uninstallCore(packageName);
+    uninstallTheme(packageName);
     rimraf('./authmagic.js', () => rimraf('./static', () => console.log('clear operation finished')));
   });
 

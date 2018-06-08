@@ -1,40 +1,64 @@
 const fs = require('fs');
 const path = require('path');
 const shell = require('shelljs');
-const packageName = 'authmagic.js';
-const authMagicEngine = '../../authmagic';
+const {ncp} = require('ncp');
+const {
+  readConfig,
+  write,
+  createStaticIfDoesntExist,
+} = require('./main');
+const authMagicEngine = '../authmagic';
 
-function init(content) {
-  write(content);
-  install();
+function populateStatic(name, cb, destination) {
+  if(!destination) {
+    destination = name;
+  }
+
+  if(!fs.existsSync(`./node_modules/${name}/static`)) {
+    return false;
+  }
+
+  if(fs.existsSync(`./static/${destination}`)) {
+    console.log(`static files for ${name} are already defined`);
+    return false;
+  }
+
+  createStaticIfDoesntExist();
+  ncp(`./node_modules/${name}/static`, `./static/${destination}`, cb);
+}
+
+function populateParams(name, packageName) {
+  const config = readConfig(packageName);
+  const file = `./node_modules/${name}/params.js`;
+  if(config.params.hasOwnProperty(name)) {
+    console.log(`params for ${name} are already defined`);
+    return false;
+  }
+
+  if(!fs.existsSync(file)) {
+    console.log(`no params were predefined for ${name}`);
+    return false;
+  }
+
+  config.params[name] = require(path.resolve(file));
+  write(config, packageName);
+  return true;
+}
+
+function init(content, packageName) {
+  write(content, packageName);
+  install(packageName);
   shell.exec(`npm install ${authMagicEngine} --save`);
 }
 
-function read() {
-  if(!fs.existsSync('./'+packageName)) {
-    return false;
-  }
-
-  try {
-    return require(path.resolve('./'+packageName));
-  } catch(e) {
-    return false;
-  }
-}
-
-function write(obj) {
-  fs.writeFileSync('./'+packageName, 'module.exports = ' + JSON.stringify(obj, null, 2) + ';');
-}
-
-function install() {
-  const {plugins, core, theme} = read();
-
+function install(packageName) {
+  const {plugins, core, theme} = readConfig(packageName);
   if(plugins) {
     for(let i=0, pluginNames = Object.keys(plugins); i<pluginNames.length; i++) {
       const name = pluginNames[i];
       const {source} = plugins[name];
       shell.exec(`npm install ${source?source:name} --save`);
-      populateParams(name);
+      populateParams(name, packageName);
       populateStatic(name);
     }
   }
@@ -42,7 +66,7 @@ function install() {
   if(core) {
     const {name, source} = core;
     shell.exec(`npm install ${source?source:name} --save`);
-    populateParams(name);
+    populateParams(name, packageName);
   }
 
   if(theme) {
@@ -54,7 +78,7 @@ function install() {
 
 module.exports = {
   init,
-  read,
+  readConfig,
   write,
   install,
 }
