@@ -1,6 +1,6 @@
 const EMPTY_DESCRIPTION = {
   core: {},
-  plugins: [],
+  plugins: {},
   params: {},
   port: 3000,
 }

@@ -53,7 +53,7 @@ function init(content, packageName) {
 
 function install(packageName) {
   const {plugins, core, theme} = readConfig(packageName);
-  if(plugins) {
+  if(plugins && Object.keys(plugins).length !== 0) {
     for(let i=0, pluginNames = Object.keys(plugins); i<pluginNames.length; i++) {
       const name = pluginNames[i];
       const {source} = plugins[name];
@@ -63,13 +63,13 @@ function install(packageName) {
     }
   }
 
-  if(core) {
+  if(core && Object.keys(core).length !== 0) {
     const {name, source} = core;
     shell.exec(`npm install ${source?source:name} --save`);
     populateParams(name, packageName);
   }
 
-  if(theme) {
+  if(theme && Object.keys(theme).length !== 0) {
     const {name, source} = theme;
     shell.exec(`npm install ${source?source:name} --save`);
     populateStatic(name);
@@ -81,4 +81,6 @@ module.exports = {
   readConfig,
   write,
   install,
+  populateParams,
+  populateStatic,
 }

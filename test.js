@@ -10,6 +10,8 @@ const {
 const {
   createStaticIfDoesntExist,
   uninstallPlugin,
+  uninstallCore,
+  uninstallTheme,
 } = require('./utils/main');
 const { EMPTY_DESCRIPTION, EXAMPLE_DESCRIPTION } = require('./consts/description');
 
@@ -29,10 +31,10 @@ test('should write config file', t => {
 })
 
 test('should init basic app', t => {
-  const packageName = '__mocks__/authmagicInit';
+  const packageName = 'authmagic';
   init(EMPTY_DESCRIPTION, packageName);
   t.pass();
-  fs.unlinkSync(path.resolve(__dirname, './__mocks__/authmagicInit.js'));
+  fs.unlinkSync(path.resolve(__dirname, './authmagic.js'));
 })
 
 test('should init example app', t => {
@@ -80,4 +82,49 @@ test('should uninstall plugin', t => {
     }
   };
   t.deepEqual(config, expectedConfig);
+  fs.unlinkSync(path.resolve(__dirname, './__mocks__/authmagicTestUninstall.js'));
+})
+
+test('should uninstall theme', t => {
+  const packageName = '__mocks__/authmagicTestUninstallTheme';
+  write(EXAMPLE_DESCRIPTION, packageName);
+  uninstallTheme(packageName);
+  const config = readConfig(packageName);
+  const expectedConfig = {
+    core: {
+      name: "authmagic-timerange-stateless-core",
+      source: "../authmagic-timerange-stateless-core"
+    },
+    "plugins": {
+      "authmagic-email-plugin": {
+      "source": "../authmagic-email-plugin"
+      }
+    },
+    params: {},
+    port: 3000,
+  };
+  t.deepEqual(config, expectedConfig);
+  fs.unlinkSync(path.resolve(__dirname, './__mocks__/authmagicTestUninstallTheme.js'));
+})
+
+test('should uninstall core', t => {
+  const packageName = '__mocks__/authmagicTestUninstallCore';
+  write(EXAMPLE_DESCRIPTION, packageName);
+  uninstallCore(packageName);
+  const config = readConfig(packageName);
+  const expectedConfig = {
+    "plugins": {
+      "authmagic-email-plugin": {
+      "source": "../authmagic-email-plugin"
+      }
+    },
+    params: {},
+    port: 3000,
+    theme: {
+      name: "authmagic-link-email-phone-bootstrap-theme",
+      source: "../authmagic-link-email-phone-bootstrap-theme"
+    }
+  };
+  t.deepEqual(config, expectedConfig);
+  fs.unlinkSync(path.resolve(__dirname, './__mocks__/authmagicTestUninstallCore.js'));
 })
