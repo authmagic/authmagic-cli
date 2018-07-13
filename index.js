@@ -6,7 +6,7 @@ const shell = require('shelljs');
 const {ncp} = require('ncp');
 const rimraf = require('rimraf');
 const packageName = 'authmagic.js';
-const authMagicEngine = '../authmagic';
+const authMagicEngine = 'authmagic';
 
 const emptyDescription = {
   core: {},
