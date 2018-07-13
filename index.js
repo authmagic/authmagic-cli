@@ -21,6 +21,10 @@ const exampleDescription = Object.assign({}, emptyDescription, {
   plugins: {'authmagic-email-plugin': {source: '../authmagic-email-plugin'}},
 });
 
+function startAuthmagic() {
+  shell.exec('node ./node_modules/authmagic/app.js');
+}
+
 function write(obj) {
   fs.writeFileSync('./'+packageName, 'module.exports = ' + JSON.stringify(obj, null, 2) + ';');
 }
@@ -228,4 +232,12 @@ program
     rimraf('./authmagic.js', () => rimraf('./static', () => console.log('clear operation finished')));
   });
 
-program.parse(process.argv);
+program
+  .command('start')
+  .action(startAuthmagic);
+
+if(process.argv.length < 3) {
+  startAuthmagic();
+} else {
+  program.parse(process.argv);
+}
