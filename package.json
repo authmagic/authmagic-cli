@@ -1,13 +1,13 @@
 {
   "name": "authmagic-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["auth", "authentication", "authorization", "openid", "oauth2"],
+  "author": "Oleksandr Knyga <oleksandrknyga@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "commander": "^2.15.1",
