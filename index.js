@@ -150,11 +150,14 @@ function uninstallTheme() {
 
 program
   .command('init')
-  .action(() => init(emptyDescription));
-
-program
-  .command('init-example')
-  .action(() => init(exampleDescription));
+  .option('-e, --example', 'Initialize example configuration file')
+  .action(function(cmd) {
+    if(cmd.example) {
+      init(exampleDescription);
+    } else {
+      init(emptyDescription);
+    }
+  });
 
 program
   .command('install [name] [source]')
