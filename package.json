@@ -6,7 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["auth", "authentication", "authorization", "openid", "oauth2"],
+  "keywords": [
+    "auth",
+    "authentication",
+    "authorization",
+    "openid",
+    "oauth2"
+  ],
   "author": "Oleksandr Knyga <oleksandrknyga@gmail.com>",
   "license": "ISC",
   "dependencies": {
