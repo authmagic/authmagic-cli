@@ -16,9 +16,9 @@ const emptyDescription = {
 };
 
 const exampleDescription = Object.assign({}, emptyDescription, {
-  core: {name: 'authmagic-timerange-stateless-core', source: '../authmagic-timerange-stateless-core'},
-  theme: {name: 'authmagic-link-email-phone-bootstrap-theme', source: '../authmagic-link-email-phone-bootstrap-theme'},
-  plugins: {'authmagic-email-plugin': {source: '../authmagic-email-plugin'}},
+  core: {name: 'authmagic-timerange-stateless-core'},
+  theme: {name: 'authmagic-link-email-phone-bootstrap-theme'},
+  plugins: {'authmagic-email-plugin': {name: 'authmagic-email-plugin'}},
 });
 
 function startAuthmagic() {
