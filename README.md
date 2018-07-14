@@ -26,7 +26,7 @@ source - location of the package (git or filesystem)
 -t, --theme - Uninstall theme
 
 ### uninstall [name]
-Installs module. Similar to npm install.
+Uninstalls module. Similar to npm uninstall.
 
 #### Optional params:
 name - package name
