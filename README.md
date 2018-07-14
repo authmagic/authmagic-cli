@@ -11,7 +11,7 @@ Creates an empty configuration file.
 -e, --example - creates predefined example configuration file, so you could try authmagic quickly.
 
 ### install [name] [source]
-Installs module. Similar to npm install. If no name were provided will install everything based on the configuration file. If no source provided would check the module via npm.
+Installs module. Similar to npm install. If name wasn't provided it will install everything based on the configuration file. If no source provided would check the module via npm.
 
 #### Optional params:
 name - package name
