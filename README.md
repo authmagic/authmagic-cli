@@ -1,3 +1,5 @@
+<img src="https://github.com/authmagic/authmagic/blob/master/docs/images/logo.png?raw=true" width="300px"/>
+
 authmagic-cli
 ========================
 CLI tool for <a href="https://github.com/authmagic/authmagic">authmagic</a> - reusable, expandable authorization service which could be used for project initialization, core/plugins/theme installation..
