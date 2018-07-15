@@ -1,10 +1,13 @@
 {
   "name": "authmagic-cli",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node" : ">=8.10.0"
   },
   "keywords": [
     "auth",
