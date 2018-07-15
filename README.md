@@ -85,3 +85,7 @@ module.exports = {
   }
 };
 ```
+
+Licence
+-----------
+authmagic-cli [MIT licensed](./LICENSE).
