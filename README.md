@@ -88,4 +88,4 @@ module.exports = {
 
 Licence
 -----------
-authmagic-cli [MIT licensed](./LICENSE).
+authmagic-cli is [MIT licensed](./LICENSE).
