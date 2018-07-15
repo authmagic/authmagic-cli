@@ -1,3 +1,5 @@
+<img src="https://github.com/authmagic/authmagic/blob/master/docs/images/logo.png?raw=true" width="300px"/>
+
 authmagic-cli
 ========================
 CLI tool for <a href="https://github.com/authmagic/authmagic">authmagic</a> - reusable, expandable authorization service which could be used for project initialization, core/plugins/theme installation..
@@ -11,7 +13,7 @@ Creates an empty configuration file.
 -e, --example - creates predefined example configuration file, so you could try authmagic quickly.
 
 ### install [name] [source]
-Installs module. Similar to npm install. If no name were provided will install everything based on the configuration file. If no source provided would check the module via npm.
+Installs module. Similar to npm install. If name wasn't provided it will install everything based on the configuration file. If no source provided would check the module via npm.
 
 #### Optional params:
 name - package name
@@ -26,7 +28,7 @@ source - location of the package (git or filesystem)
 -t, --theme - Uninstall theme
 
 ### uninstall [name]
-Installs module. Similar to npm install.
+Uninstalls module. Similar to npm uninstall.
 
 #### Optional params:
 name - package name
@@ -83,3 +85,7 @@ module.exports = {
   }
 };
 ```
+
+Licence
+-----------
+authmagic-cli is [MIT licensed](./LICENSE).
