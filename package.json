@@ -14,7 +14,7 @@
     "oauth2"
   ],
   "author": "Oleksandr Knyga <oleksandrknyga@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "commander": "^2.15.1",
     "ncp": "^2.0.0",
